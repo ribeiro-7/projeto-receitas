@@ -5,42 +5,42 @@
     
     <div class="receita-title-container">
         <h2 class="receita-title">
-            Lorem ipsum dolor sit amet.
+            {{ receita.title }}
         </h2>
     </div>
 
     <div class="receita-author">
         <span class="receita-author-item">
             <i class="fas fa-user"></i>
-            Arthur Ribeiro
+            {{ receita.author.first_name }} {{ receita.author.last_name }}
         </span>
         <span class="receita-author-item">
             <i class="fas fa-calendar-alt"></i>
-            19/06/2025 às 12:12
+            {{ receita.created_at|date:"d/m/Y" }} às {{ receita.created_at|date:"H:i:s" }}
         </span>
         <span class="receita-author-item">
             <a href="">
                 <i class="fas fa-layer-group"></i>
-                <span>Café da manhã</span>
+                <span>{{ receita.category.name }}</span>
             </a>
         </span>
     </div>
 
     <div class="receita-content">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet molestias ratione eum quisquam culpa assumenda soluta repellendus? Corporis, ea? Ea voluptatum quod repudiandae repellendus quam itaque. Aperiam voluptas eius reprehenderit.</p>
+        <p>{{ receita.description }}</p>
     </div>
 
     <div class="receita-meta-container">
         <div class="receita-meta receita-preparation">
             <h3 class="receita-meta-title"><i class="fas fa-stopwatch"></i> Preparo</h3>
             <div class="receita-meta-text">
-                0 Minutos
+                {{ receita.preparation_time }} {{ receita.preparation_time_unit }}
             </div>
         </div>
         <div class="receita-meta receita-servings">
             <h3 class="receita-meta-title"><i class="fas fa-pizza-slice"></i> Porções</h3>
             <div class="receita-meta-text">
-                0 Porções
+                {{ receita.servings }} {{ receita.servings_unit }}
             </div>
         </div>
     </div>
