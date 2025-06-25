@@ -10,11 +10,12 @@ def home(request):
         }
     )
 
-def receitas(request, pk):
+def receita(request, pk):
     return render(
         request, 
         'receitas/pages/receita-view.html',
         context={
-            'receita': make_recipe()
+            'receita': make_recipe(),
+            'is_detail_page': True,
         }
     )
