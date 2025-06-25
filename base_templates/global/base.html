@@ -1,4 +1,11 @@
-{% include "receitas/partials/head.html" %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    {% include "receitas/partials/head.html" %}
+    <title>{% block title %}{% endblock title %} Receitas</title>
+</head>
+
 <body>
     {% include "receitas/partials/header.html" %}
     {% include "receitas/partials/search.html" %}
@@ -9,3 +16,4 @@
 
     {% include "receitas/partials/footer.html" %}
 </body>
+<html>
