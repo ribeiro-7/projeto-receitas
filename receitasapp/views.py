@@ -1,12 +1,16 @@
 from django.shortcuts import render
 from utils.receitas.factory import make_recipe
+from .models import Receita
 
 def home(request):
+
+    receitas = Receita.objects.all().filter(is_published=True).order_by('-id')
+
     return render(
         request, 
         'receitas/pages/home.html',
         context={
-            'receitas': [make_recipe() for _ in range(10)],
+            'receitas': receitas,
         }
     )
 
@@ -17,5 +21,17 @@ def receita(request, pk):
         context={
             'receita': make_recipe(),
             'is_detail_page': True,
+        }
+    )
+
+def categoria(request, category_pk):
+
+    receitas = Receita.objects.all().filter(category__id = category_pk, is_published=True).order_by('-id')
+
+    return render(
+        request,
+        'receitas/pages/category.html',
+        context={
+            'receitas': receitas,
         }
     )
