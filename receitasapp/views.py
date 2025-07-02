@@ -5,7 +5,7 @@ from .models import Receita
 
 def home(request):
 
-    receitas = Receita.objects.all().filter(is_published=True).order_by('-id')
+    receitas = Receita.objects.filter(is_published=True).order_by('-id')
 
     return render(
         request, 
