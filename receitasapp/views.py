@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from utils.receitas.factory import make_recipe
-from django.shortcuts import get_list_or_404
+from django.shortcuts import get_list_or_404, get_object_or_404
 from .models import Receita
 
 def home(request):
@@ -15,22 +15,26 @@ def home(request):
         }
     )
 
-def receita(request, pk):
+def receita(request, id):
+
+    receita = get_object_or_404(Receita, pk=id, is_published=True)
+
     return render(
         request, 
         'receitas/pages/receita-view.html',
         context={
-            'receita': make_recipe(),
+            'receita': receita,
             'is_detail_page': True,
+            'title': f'{receita.title} - '
         }
     )
 
-def categoria(request, category_pk):
+def categoria(request, category_id):
 
     #receitas = Receita.objects.all().filter(category__id = category_pk, is_published=True).order_by('-id')
 
     receitas = get_list_or_404(
-        Receita.objects.all().filter(category__id = category_pk, is_published=True).order_by('-id')
+        Receita.objects.all().filter(category__id = category_id, is_published=True).order_by('-id')
     )
 
     return render(
