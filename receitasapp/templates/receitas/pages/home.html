@@ -4,8 +4,12 @@
 
 {% block content %}
 <div class="main-content main-content-list container">
-    {% for receita in receitas %}
-        {% include "receitas/partials/receita.html" %}
-    {% endfor %}
+    {% if receitas %}
+        {% for receita in receitas %}
+                {% include "receitas/partials/receita.html" %}
+        {% endfor %}
+    {% else %}
+        Não há receitas no momento.
+    {% endif %}
 </div>
 {% endblock content %}
