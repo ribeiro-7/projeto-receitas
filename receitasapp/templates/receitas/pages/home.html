@@ -9,7 +9,9 @@
                 {% include "receitas/partials/receita.html" %}
         {% endfor %}
     {% else %}
-        <h1>Não há receitas no momento.</h1>
+        <div class="center">
+            <h1>Não há receitas no momento.</h1>
+        </div>
     {% endif %}
 </div>
 {% endblock content %}
