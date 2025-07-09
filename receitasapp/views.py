@@ -15,9 +15,9 @@ def home(request):
         }
     )
 
-def receita(request, id):
+def receita(request, receita_id):
 
-    receita = get_object_or_404(Receita, pk=id, is_published=True)
+    receita = get_object_or_404(Receita, pk=receita_id, is_published=True)
 
     return render(
         request, 
