@@ -69,7 +69,7 @@ class ReceitaViewsTest(ReceitaTestBase):
 
         receita = self.make_receita(title='This is a category test')
 
-        response = self.client.get(reverse('receitas:receita', kwargs={'receita_id': receita.id}))
+        response = self.client.get(reverse('receitas:categoria', kwargs={'category_id': receita.category.id}))
         content = response.content.decode('utf-8')
         reponse_context_receita = response.context['receitas']
 
@@ -81,9 +81,9 @@ class ReceitaViewsTest(ReceitaTestBase):
 
     def test_receita_categoria_template_dont_load_receitas_if_receita_isnt_published(self):
 
-        receita = self.make_receita(title='This is a category test')
+        receita = self.make_receita(is_published=False)
 
-        response = self.client.get(reverse('receitas:receita', kwargs={'receita_id': receita.id}))
+        response = self.client.get(reverse('receitas:categoria', kwargs={'category_id': receita.category.id}))
         
         self.assertEqual(response.status_code, 404)
 
@@ -104,13 +104,13 @@ class ReceitaViewsTest(ReceitaTestBase):
 
     def test_receita_detail_template_loads_correct_receita(self):
 
-        receita = self.make_receita(title='This is a category test')
+        receita = self.make_receita(title='This is a detail test')
 
         response = self.client.get(reverse('receitas:receita', kwargs={'receita_id': receita.id}))
         content = response.content.decode('utf-8')
 
         self.assertTemplateUsed(response, 'receitas/pages/receita-view.html')
-        self.assertIn('This is a category test', content)
+        self.assertIn('This is a detail test', content)
         self.assertIn('receita criada para teste', content)
 
     def test_receita_detail_template_dont_load_receitas_if_receita_isnt_published(self):
