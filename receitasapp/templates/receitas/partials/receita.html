@@ -72,7 +72,7 @@
 
     {% if is_detail_page is True %}
         <div class="preparation-steps">
-            {% if receita.preparation_steps_is_html is True %}
+            {% if receita.preparation_steps_html is True %}
                 {{ receita.preparation_steps|safe }}
             {% else %}
                 {{ receita.preparation_steps|linebreaksbr }}
