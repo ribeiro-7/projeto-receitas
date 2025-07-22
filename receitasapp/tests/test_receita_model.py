@@ -1,6 +1,7 @@
 from django.core.exceptions import ValidationError
 from .test_receita_base import ReceitaTestBase, Receita
 from parameterized import parameterized
+import uuid
 
 
 class ReceitaModelTest(ReceitaTestBase):
@@ -11,10 +12,12 @@ class ReceitaModelTest(ReceitaTestBase):
     
     def make_receita_no_defaults(self):
 
+        slug_unico = f'receita-teste-{uuid.uuid4().hex[:8]}'
+
         receita = Receita(
             title = 'receita teste',
             description = 'receita criada para teste',
-            slug = 'receita-teste',
+            slug = slug_unico,
             preparation_time = 1,
             preparation_time_unit = 'Minuto',
             servings = 1,
