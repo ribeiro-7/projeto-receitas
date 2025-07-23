@@ -2,6 +2,7 @@ from django.http import Http404
 from django.shortcuts import render
 from utils.receitas.factory import make_recipe
 from django.shortcuts import get_list_or_404, get_object_or_404
+from django.db.models import Q
 from .models import Receita
 
 def home(request):
@@ -53,11 +54,20 @@ def search(request):
     if not search_term:
         raise Http404
     
+    receitas = Receita.objects.filter(
+        Q(
+            Q(title__icontains=search_term) |
+            Q(description__icontains=search_term),
+        ),
+        is_published=True
+    ).order_by('-id')
+
     return render(
         request, 
         'receitas/pages/search.html', 
         context={
             'page_title': f'Search for "{search_term}" | ',
-            'search_term': search_term
+            'search_term': search_term,
+            'receitas': receitas
         }
     )
